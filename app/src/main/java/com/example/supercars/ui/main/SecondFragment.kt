@@ -51,10 +51,12 @@ class SecondFragment : Fragment() {
 
 
     private fun saveCar() {
-            val brand = binding.carBrand.text.toString().takeIf { it.isNotBlank() } ?: return
-            val model = binding.carModel.text.toString().takeIf { it.isNotBlank() } ?: return
-            val year = binding.carYear.text.toString().takeIf { it.isNotBlank() } ?: return
-            val volume = binding.carVolume.text.toString().takeIf { it.isNotBlank() } ?: return
+        views {
+            val brand = carBrand.text.toString().takeIf { it.isNotBlank() } ?: return@views
+            val model = carModel.text.toString().takeIf { it.isNotBlank() } ?: return@views
+            val year = carYear.text.toString().takeIf { it.isNotBlank() } ?: return@views
+            val volume =
+                carVolume.text.toString().takeIf { it.isNotBlank() } ?: return@views
 
             val car = Car(
                 brand = brand,
@@ -64,8 +66,8 @@ class SecondFragment : Fragment() {
             )
 
             viewModel.save(car)
-
+        }
 
     }
-
+    private fun <T> views(block: FragmentSecondBinding.() -> T): T? = binding?.block()
 }

@@ -22,10 +22,12 @@ import kotlinx.coroutines.flow.onEach
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 class FirstFragment : Fragment() {
-
+//    companion object {
+//        fun newInstance() = MainFragment()
+//    }
 
     private val viewModel: MainViewModel by viewModels()
-    private val adapter: CarsAdapter? get() = binding.superCarList.adapter as? CarsAdapter
+    private val adapter: CarsAdapter? get() = views {  superCarList.adapter as? CarsAdapter }
     private var _binding: FragmentFirstBinding? = null
 
     // This property is only valid between onCreateView and
@@ -44,16 +46,17 @@ class FirstFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-            binding.superCarList.layoutManager = LinearLayoutManager(context)
-            binding.superCarList.adapter = CarsAdapter()
 
-//            SwipeHelper(viewModel::delete).attachToRecyclerView(binding.superCarList)
-            binding.fab.setOnClickListener {
+        views {
+            superCarList.adapter = CarsAdapter()
+//            SwipeHelper(viewModel::delete).attachToRecyclerView(superCarList)
+            fab.setOnClickListener {
                 findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
             }
 
-//        viewModel.cars.onEach(::renderCars)
+//        viewModel.cars.onEach(::renderCars).launchIn(lifecycleScope)
 
+        }
     }
 
     override fun onDestroyView() {
@@ -65,5 +68,6 @@ class FirstFragment : Fragment() {
         adapter?.submitList(cars)
     }
 
+    private fun <T> views(block: FragmentFirstBinding.() -> T): T? = binding?.block()
 
 }

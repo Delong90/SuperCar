@@ -1,7 +1,7 @@
 package com.example.supercars.repository
 
 
-import android.provider.ContactsContract
+
 import com.example.supercars.repository.room.Car
 import com.example.supercars.repository.room.CarsDatabase
 import kotlinx.coroutines.flow.Flow
@@ -16,6 +16,6 @@ class Repository(
 
     suspend fun save(car: Car) = dao.add(car)
 
-    suspend fun delete(note: Car) = dao.delete(note)
+    suspend fun delete(car: Car) = dao.delete(car)
 
 }
