@@ -1,6 +1,5 @@
 package com.example.supercars.ui.main.adapter
 
-import android.provider.ContactsContract
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.example.supercars.repository.room.Car

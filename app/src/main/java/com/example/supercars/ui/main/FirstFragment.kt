@@ -22,9 +22,9 @@ import kotlinx.coroutines.flow.onEach
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 class FirstFragment : Fragment() {
-//    companion object {
-//        fun newInstance() = MainFragment()
-//    }
+    companion object {
+        fun newInstance() = FirstFragment()
+    }
 
     private val viewModel: MainViewModel by viewModels()
     private val adapter: CarsAdapter? get() = views {  superCarList.adapter as? CarsAdapter }
