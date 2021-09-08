@@ -14,6 +14,11 @@ class CarViewHolder(
         private set
 
     fun onBind(item: Car) {
+//        this.item = Car(brand = "",
+//        model = "",
+//        year = 0,
+//        volume = 0.0)
+//
         this.item = item
 
         views {

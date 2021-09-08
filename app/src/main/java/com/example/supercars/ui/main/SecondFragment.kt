@@ -6,11 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.supercars.MainViewModel
 import com.example.supercars.R
 import com.example.supercars.databinding.FragmentSecondBinding
 import com.example.supercars.repository.room.Car
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -42,6 +45,7 @@ class SecondFragment : Fragment() {
             saveCar()
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
         }
+
     }
 
     override fun onDestroyView() {
@@ -55,8 +59,7 @@ class SecondFragment : Fragment() {
             val brand = carBrand.text.toString().takeIf { it.isNotBlank() } ?: return@views
             val model = carModel.text.toString().takeIf { it.isNotBlank() } ?: return@views
             val year = carYear.text.toString().takeIf { it.isNotBlank() } ?: return@views
-            val volume =
-                carVolume.text.toString().takeIf { it.isNotBlank() } ?: return@views
+            val volume = carVolume.text.toString().takeIf { it.isNotBlank() } ?: return@views
 
             val car = Car(
                 brand = brand,
@@ -69,5 +72,5 @@ class SecondFragment : Fragment() {
         }
 
     }
-    private fun <T> views(block: FragmentSecondBinding.() -> T): T? = binding?.block()
+    private fun <T> views(block: FragmentSecondBinding.() -> T): T? = binding.block()
 }

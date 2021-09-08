@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import com.example.supercars.repository.room.Car
 
 
-class CarsAdapter : ListAdapter<Car, CarViewHolder>(NoteDiffCallback()) {
+class CarsAdapter : ListAdapter<Car, CarViewHolder>(CarDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarViewHolder =
         CarViewHolder.create(parent)
 

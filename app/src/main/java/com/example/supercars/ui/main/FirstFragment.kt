@@ -49,12 +49,12 @@ class FirstFragment : Fragment() {
 
         views {
             superCarList.adapter = CarsAdapter()
-//            SwipeHelper(viewModel::delete).attachToRecyclerView(superCarList)
+            SwipeHelper(viewModel::delete).attachToRecyclerView(superCarList)
             fab.setOnClickListener {
                 findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
             }
 
-//        viewModel.cars.onEach(::renderCars).launchIn(lifecycleScope)
+        viewModel.cars.onEach(::renderCars).launchIn(lifecycleScope)
 
         }
     }
@@ -68,6 +68,6 @@ class FirstFragment : Fragment() {
         adapter?.submitList(cars)
     }
 
-    private fun <T> views(block: FragmentFirstBinding.() -> T): T? = binding?.block()
+    private fun <T> views(block: FragmentFirstBinding.() -> T): T? = binding.block()
 
 }
