@@ -20,13 +20,10 @@ import kotlinx.coroutines.flow.onEach
 
 class FirstFragment : Fragment() {
 
-
     private val viewModel: MainViewModel by viewModels()
     private var _binding: FragmentFirstBinding? = null
     private val binding get() = _binding!!
     private val adapter: CarsAdapter? get() =   binding.superCarList.adapter as? CarsAdapter
-    // This property is only valid between onCreateView and
-    // onDestroyView.
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,33 +32,24 @@ class FirstFragment : Fragment() {
 
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
             binding.superCarList.adapter = CarsAdapter()
             SwipeHelper(viewModel::delete).attachToRecyclerView(binding.superCarList)
             binding.fab.setOnClickListener {
                 findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
             }
-
         viewModel.cars.onEach(::renderCars).launchIn(lifecycleScope)
-
-
     }
 
 //    override fun onDestroyView() {
 //        super.onDestroyView()
 //        _binding = null
 //    }
-
     private fun renderCars(cars: List<Car>) {
         adapter?.submitList(cars)
     }
-
 //    private fun <T> views(block: FragmentFirstBinding.() -> T): T? = binding.block()
-
 }
