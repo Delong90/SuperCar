@@ -18,21 +18,15 @@ import com.example.supercars.ui.main.adapter.SwipeHelper
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
 class FirstFragment : Fragment() {
-    companion object {
-        fun newInstance() = FirstFragment()
-    }
+
 
     private val viewModel: MainViewModel by viewModels()
-    private val adapter: CarsAdapter? get() = views {  superCarList.adapter as? CarsAdapter }
     private var _binding: FragmentFirstBinding? = null
-
+    private val binding get() = _binding!!
+    private val adapter: CarsAdapter? get() =   binding.superCarList.adapter as? CarsAdapter
     // This property is only valid between onCreateView and
     // onDestroyView.
-    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,27 +41,27 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        views {
-            superCarList.adapter = CarsAdapter()
-            SwipeHelper(viewModel::delete).attachToRecyclerView(superCarList)
-            fab.setOnClickListener {
+
+            binding.superCarList.adapter = CarsAdapter()
+            SwipeHelper(viewModel::delete).attachToRecyclerView(binding.superCarList)
+            binding.fab.setOnClickListener {
                 findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
             }
 
         viewModel.cars.onEach(::renderCars).launchIn(lifecycleScope)
 
-        }
+
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+//    override fun onDestroyView() {
+//        super.onDestroyView()
+//        _binding = null
+//    }
 
     private fun renderCars(cars: List<Car>) {
         adapter?.submitList(cars)
     }
 
-    private fun <T> views(block: FragmentFirstBinding.() -> T): T? = binding.block()
+//    private fun <T> views(block: FragmentFirstBinding.() -> T): T? = binding.block()
 
 }
