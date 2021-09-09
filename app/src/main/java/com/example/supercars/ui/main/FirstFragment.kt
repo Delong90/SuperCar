@@ -1,5 +1,6 @@
 package com.example.supercars.ui.main
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,7 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.preference.PreferenceManager
 import com.example.supercars.MainViewModel
 import com.example.supercars.R
 import com.example.supercars.databinding.FragmentFirstBinding
@@ -25,11 +26,11 @@ class FirstFragment : Fragment() {
     private val binding get() = _binding!!
     private val adapter: CarsAdapter? get() =   binding.superCarList.adapter as? CarsAdapter
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -41,13 +42,26 @@ class FirstFragment : Fragment() {
             binding.fab.setOnClickListener {
                 findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
             }
-        viewModel.cars.onEach(::renderCars).launchIn(lifecycleScope)
+
+             viewModel.cars.onEach(::renderCars).launchIn(lifecycleScope)
     }
 
 //    override fun onDestroyView() {
 //        super.onDestroyView()
 //        _binding = null
 //    }
+
+    override fun onResume() {
+        var sharedPreferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        var regular = sharedPreferences.getString(getString(R.string.list_preference), "")
+                    when(regular){
+                    "Default" -> viewModel.cars.onEach(::renderCars).launchIn(lifecycleScope)
+                    "Brand"-> viewModel.carsBrand.onEach(::renderCars).launchIn(lifecycleScope)
+                    "Year"-> viewModel.carsYear.onEach(::renderCars).launchIn(lifecycleScope)
+                    else-> viewModel.carsPrice.onEach(::renderCars).launchIn(lifecycleScope)
+            }
+        super.onResume()
+    }
     private fun renderCars(cars: List<Car>) {
         adapter?.submitList(cars)
     }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<!--    <SwitchPreference-->
+<!--        app:key="switch"-->
+<!--        app:title="Switch"-->
+<!--        app:summary="switch summary"-->
+<!--        app:defaultValue="false" />-->
+
+
+<!--    <EditTextPreference-->
+<!--        app:key="editText"-->
+<!--        app:dialogTitle="Fill edit text"-->
+<!--        app:title="Edit text"-->
+<!--        app:defaultValue="123"-->
+<!--        app:summary="Edit text summary"/>-->
+
+<!--    <SeekBarPreference-->
+<!--        android:title="Seek Bar"-->
+<!--        app:key="seekBar"-->
+<!--        app:min="1"-->
+<!--        android:max="10"-->
+<!--        app:showSeekBarValue="true"-->
+<!--        app:seekBarIncrement="1"/>-->
+    <ListPreference
+        android:key="@string/list_preference"
+        android:defaultValue="1"
+        android:entries="@array/sorting"
+        android:entryValues="@array/sorting"
+        android:title="Sorting cars"
+        android:summary="Sorts cars by the selected parameter"/>
+
+
+</PreferenceScreen>

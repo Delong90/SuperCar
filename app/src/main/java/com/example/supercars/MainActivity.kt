@@ -1,5 +1,6 @@
 package com.example.supercars
 
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +11,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import com.example.supercars.databinding.ActivityMainBinding
+import com.example.supercars.settings.SettingsActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,10 +42,17 @@ class MainActivity : AppCompatActivity() {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
+         when (item.itemId) {
+            R.id.action_settings -> {
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
+            }
+//             необходимо реализовать если так получится
+             R.id.action_room -> true
+             R.id.action_cursor -> true
             else -> super.onOptionsItemSelected(item)
         }
+        return true
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -14,6 +14,12 @@ class Repository(
 
     fun getAll(): Flow<List<Car>> = dao.getAll()
 
+    fun getAllPrice(): Flow<List<Car>> = dao.getAllPrice()
+
+    fun getAllBrand(): Flow<List<Car>> = dao.getAllBrand()
+
+    fun getAllYear(): Flow<List<Car>> = dao.getAllYear()
+
     suspend fun save(car: Car) = dao.add(car)
 
     suspend fun delete(car: Car) = dao.delete(car)

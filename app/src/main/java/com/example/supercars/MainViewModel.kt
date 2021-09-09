@@ -17,6 +17,9 @@ class MainViewModel : ViewModel() {
     private val repository: Repository by locateLazy()
 
     val cars = repository.getAll().asLiveDataFlow()
+    val carsPrice = repository.getAllPrice().asLiveDataFlow()
+    val carsBrand = repository.getAllBrand().asLiveDataFlow()
+    val carsYear = repository.getAllYear().asLiveDataFlow()
 
     fun save(car: Car) {
         viewModelScope.launch { repository.save(createCar(car)) }
