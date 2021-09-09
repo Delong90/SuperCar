@@ -40,6 +40,13 @@
             style="@style/TextAppearance.MaterialComponents.Body1"
             tools:text="Engine volume"
             />
+        <TextView
+            android:id="@+id/carPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            tools:text="Car price"
+            />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

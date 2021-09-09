@@ -30,8 +30,8 @@ class MainViewModel : ViewModel() {
         brand = car.brand,
         model = car.model,
         year = car.year,
-        volume = car.volume
-
+        volume = car.volume,
+        price = car.price
     )
 
     private fun <T> Flow<T>.asLiveDataFlow() =

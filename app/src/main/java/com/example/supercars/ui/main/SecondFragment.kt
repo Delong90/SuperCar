@@ -49,11 +49,13 @@ class SecondFragment : Fragment() {
             val model = binding.carModel.text.toString().takeIf { it.isNotBlank() } ?: return
             val year = binding.carYear.text.toString().takeIf { it.isNotBlank() } ?: return
             val volume = binding.carVolume.text.toString().takeIf { it.isNotBlank() } ?: return
+            val price = binding.carPrice.text.toString().takeIf { it.isNotBlank() } ?: return
             val car = Car(
                 brand = brand,
                 model = model,
                 year = year.toInt(),
-                volume = volume.toDouble()
+                volume = volume.toDouble(),
+                price = price.toInt()
             )
             viewModel.save(car)
     }

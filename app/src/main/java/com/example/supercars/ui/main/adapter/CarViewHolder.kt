@@ -24,8 +24,9 @@ class CarViewHolder(
         views {
             carBrand.text = "Brand:${item.brand}"
             carModel.text = "Model:${item.model}"
-            carYearOfIssue.text = "Year:${item.year.toString()}"
-            carEngineVolume.text = "Engine volume:${item.volume.toString()}"
+            carYearOfIssue.text = "Year:${item.year}"
+            carEngineVolume.text = "Engine volume:${item.volume}"
+            carPrice.text = "Price:${item.price}$"
         }
     }
 
