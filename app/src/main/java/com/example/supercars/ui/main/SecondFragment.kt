@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -21,9 +22,6 @@ class SecondFragment : Fragment() {
     private val binding get() = _binding!!
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,7 +32,7 @@ class SecondFragment : Fragment() {
         binding.carYearPicker.minValue = 1890
         binding.carYearPicker.maxValue = 2021
         binding.carYearPicker.wrapSelectorWheel = true
-//        binding.carYearPicker.displayedValues = 2000
+
 
 
         return binding.root
@@ -43,12 +41,18 @@ class SecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.buttonNewSuperCar.setOnClickListener {
-            saveCar()
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+            if(binding.carModel.text.toString() != "" &&
+                binding.carPrice.text.toString()!= ""&&
+                binding.carPrice.text.toString().toInt() > 0) {
+                saveCar()
+                findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+            } else{
+                Toast.makeText(context, "Invalid input!", Toast.LENGTH_LONG).show()
+            }
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -70,6 +74,7 @@ class SecondFragment : Fragment() {
             )
             viewModel.save(car)
     }
+
 
 
 //    private fun <T> views(block: FragmentSecondBinding.() -> T): T? = binding.block()

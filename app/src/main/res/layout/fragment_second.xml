@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -125,7 +125,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/enter_price_car"
-            android:inputType="numberSigned" />
+            android:inputType="numberSigned"
+            android:maxLength="9"/>
 
         <View
             android:layout_width="wrap_content"
@@ -139,7 +140,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="80dp"
-            android:text="@string/addCar" />
+            android:text="@string/addCar"
+            />
 
     </LinearLayout>
 
