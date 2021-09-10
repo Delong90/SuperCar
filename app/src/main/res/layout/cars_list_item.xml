@@ -33,13 +33,13 @@
             tools:text="Year of issue"
             />
 
-        <TextView
-            android:id="@+id/carEngineVolume"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/TextAppearance.MaterialComponents.Body1"
-            tools:text="Engine volume"
-            />
+<!--        <TextView-->
+<!--            android:id="@+id/carEngineVolume"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            style="@style/TextAppearance.MaterialComponents.Body1"-->
+<!--            tools:text="Engine volume"-->
+<!--            />-->
         <TextView
             android:id="@+id/carPrice"
             android:layout_width="match_parent"

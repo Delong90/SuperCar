@@ -59,13 +59,13 @@ class SecondFragment : Fragment() {
             val brand = binding.carBrandSpinner.selectedItem.toString().takeIf { it.isNotBlank() } ?: return
             val model = binding.carModel.text.toString().takeIf { it.isNotBlank() } ?: return
             var year =  binding.carYearPicker.value
-            val volume = binding.carVolumeSpinner.selectedItem.toString().takeIf { it.isNotBlank() } ?: return
+//            val volume = binding.carVolumeSpinner.selectedItem.toString().takeIf { it.isNotBlank() } ?: return
             val price = binding.carPrice.text.toString().takeIf { it.isNotBlank() } ?: return
             val car = Car(
                 brand = brand,
                 model = model,
                 year = year,
-                volume = volume.toDouble(),
+//                volume = volume.toDouble(),
                 price = price.toInt()
             )
             viewModel.save(car)
