@@ -20,12 +20,23 @@ class SecondFragment : Fragment() {
     private var _binding: FragmentSecondBinding? = null
     private val binding get() = _binding!!
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
+        binding.carYearPicker.minValue = 1890
+        binding.carYearPicker.maxValue = 2021
+        binding.carYearPicker.wrapSelectorWheel = true
+//        binding.carYearPicker.displayedValues = 2000
+
+
         return binding.root
 
     }
@@ -45,19 +56,21 @@ class SecondFragment : Fragment() {
     }
 
     private fun saveCar() {
-            val brand = binding.carBrand.text.toString().takeIf { it.isNotBlank() } ?: return
+            val brand = binding.carBrandSpinner.selectedItem.toString().takeIf { it.isNotBlank() } ?: return
             val model = binding.carModel.text.toString().takeIf { it.isNotBlank() } ?: return
-            val year = binding.carYear.text.toString().takeIf { it.isNotBlank() } ?: return
-            val volume = binding.carVolume.text.toString().takeIf { it.isNotBlank() } ?: return
+            var year =  binding.carYearPicker.value
+            val volume = binding.carVolumeSpinner.selectedItem.toString().takeIf { it.isNotBlank() } ?: return
             val price = binding.carPrice.text.toString().takeIf { it.isNotBlank() } ?: return
             val car = Car(
                 brand = brand,
                 model = model,
-                year = year.toInt(),
+                year = year,
                 volume = volume.toDouble(),
                 price = price.toInt()
             )
             viewModel.save(car)
     }
+
+
 //    private fun <T> views(block: FragmentSecondBinding.() -> T): T? = binding.block()
 }
