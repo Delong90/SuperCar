@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_firstCursorFragment"
+            app:destination="@id/firstCursorFragment" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -23,6 +26,33 @@
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+        <action
+            android:id="@+id/action_SecondFragment_to_firstCursorFragment"
+            app:destination="@id/firstCursorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/secondCursorFragment"
+        android:name="com.example.supercars.ui.main.SecondCursorFragment"
+        android:label="fragment_second_cursor"
+        tools:layout="@layout/fragment_second_cursor" >
+        <action
+            android:id="@+id/action_secondCursorFragment_to_firstCursorFragment"
+            app:destination="@id/firstCursorFragment" />
+        <action
+            android:id="@+id/action_secondCursorFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/firstCursorFragment"
+        android:name="com.example.supercars.ui.main.FirstCursorFragment"
+        android:label="fragment_first_cursor"
+        tools:layout="@layout/fragment_first_cursor" >
+        <action
+            android:id="@+id/action_firstCursorFragment_to_secondCursorFragment"
+            app:destination="@id/secondCursorFragment" />
+        <action
+            android:id="@+id/action_firstCursorFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
 </navigation>

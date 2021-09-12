@@ -25,11 +25,16 @@
 <!--        app:seekBarIncrement="1"/>-->
     <ListPreference
         android:key="@string/list_preference"
-        android:defaultValue="1"
         android:entries="@array/sorting"
         android:entryValues="@array/sorting"
         android:title="Sorting cars"
         android:summary="Sorts cars by the selected parameter"/>
 
+    <ListPreference
+        android:key="@string/list_preference_room_cursor"
+        android:entries="@array/room_cursor"
+        android:entryValues="@array/room_cursor"
+        android:title="Database method"
+        android:summary="Choose a method of working with the database"/>
 
 </PreferenceScreen>

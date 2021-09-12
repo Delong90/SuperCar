@@ -25,6 +25,7 @@ class FirstFragment : Fragment() {
     private var _binding: FragmentFirstBinding? = null
     private val binding get() = _binding!!
     private val adapter: CarsAdapter? get() =   binding.superCarList.adapter as? CarsAdapter
+    var methodDB = "Room"
 
 
     override fun onCreateView(
@@ -37,13 +38,22 @@ class FirstFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        var sharedPreferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        var regularDB = sharedPreferences.getString(getString(R.string.list_preference_room_cursor), "")
+        when(regularDB){
+            "Cursor" -> methodDB = "Cursor"
+            "Room" -> methodDB = "Room"
+        }
+        if (methodDB == "Cursor"){
+            findNavController().navigate(R.id.action_FirstFragment_to_firstCursorFragment)
+        } else {
             binding.superCarList.adapter = CarsAdapter()
             SwipeHelper(viewModel::delete).attachToRecyclerView(binding.superCarList)
             binding.fab.setOnClickListener {
                 findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
             }
-
-             viewModel.cars.onEach(::renderCars).launchIn(lifecycleScope)
+            viewModel.cars.onEach(::renderCars).launchIn(lifecycleScope)
+        }
     }
 
 //    override fun onDestroyView() {
@@ -54,12 +64,18 @@ class FirstFragment : Fragment() {
     override fun onResume() {
         var sharedPreferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
         var regular = sharedPreferences.getString(getString(R.string.list_preference), "")
-                    when(regular){
-                    "Default" -> viewModel.cars.onEach(::renderCars).launchIn(lifecycleScope)
-                    "Brand"-> viewModel.carsBrand.onEach(::renderCars).launchIn(lifecycleScope)
-                    "Year"-> viewModel.carsYear.onEach(::renderCars).launchIn(lifecycleScope)
-                    else-> viewModel.carsPrice.onEach(::renderCars).launchIn(lifecycleScope)
-            }
+        when(regular){
+            "Default" -> viewModel.cars.onEach(::renderCars).launchIn(lifecycleScope)
+            "Brand"-> viewModel.carsBrand.onEach(::renderCars).launchIn(lifecycleScope)
+            "Year"-> viewModel.carsYear.onEach(::renderCars).launchIn(lifecycleScope)
+            else-> viewModel.carsPrice.onEach(::renderCars).launchIn(lifecycleScope)
+        }
+        var regularDB = sharedPreferences.getString(getString(R.string.list_preference_room_cursor), "")
+        when(regularDB){
+            "Cursor" -> methodDB = "Cursor"
+            "Room" -> methodDB = "Room"
+        }
+        if (methodDB == "Cursor"){findNavController().navigate(R.id.action_FirstFragment_to_firstCursorFragment)}
         super.onResume()
     }
     private fun renderCars(cars: List<Car>) {

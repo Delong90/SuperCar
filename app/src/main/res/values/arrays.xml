@@ -8,6 +8,11 @@
     </string-array>
 
 
+    <string-array name="room_cursor">
+        <item>Room</item>
+        <item>Cursor</item>
+    </string-array>
+
     <string-array name="brands">
         <item>Acura</item>
         <item>Adler</item>
