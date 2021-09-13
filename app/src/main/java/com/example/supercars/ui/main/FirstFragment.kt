@@ -1,11 +1,14 @@
 package com.example.supercars.ui.main
 
 import android.content.SharedPreferences
+import android.database.Cursor
+import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SimpleCursorAdapter
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -13,6 +16,7 @@ import androidx.preference.PreferenceManager
 import com.example.supercars.MainViewModel
 import com.example.supercars.R
 import com.example.supercars.databinding.FragmentFirstBinding
+import com.example.supercars.repository.DatabaseHelper
 import com.example.supercars.repository.room.Car
 import com.example.supercars.ui.main.adapter.CarsAdapter
 import com.example.supercars.ui.main.adapter.SwipeHelper
@@ -26,6 +30,7 @@ class FirstFragment : Fragment() {
     private val binding get() = _binding!!
     private val adapter: CarsAdapter? get() =   binding.superCarList.adapter as? CarsAdapter
     var methodDB = "Room"
+
 
 
     override fun onCreateView(

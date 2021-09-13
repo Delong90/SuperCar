@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface CarsDao {
 
-    @Query("SELECT * FROM cars order by id")
+    @Query("SELECT * FROM cars order by _id")
     fun getAll(): Flow<List<Car>>
 
     @Query("SELECT * FROM cars order by price")
