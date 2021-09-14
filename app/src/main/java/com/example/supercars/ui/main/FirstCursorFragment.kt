@@ -5,10 +5,9 @@ import android.content.SharedPreferences
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
+import android.view.*
+import android.widget.AdapterView
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.SimpleCursorAdapter
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -57,6 +56,31 @@ class FirstCursorFragment : Fragment() {
             }
         }
     }
+
+    override fun onCreateContextMenu(
+        menu: ContextMenu,
+        v: View,
+        menuInfo: ContextMenu.ContextMenuInfo?
+    ) {
+        super.onCreateContextMenu(menu, v, menuInfo)
+        menu.add(0, CM_DELETE_ID, 0, R.string.delete_record)
+    }
+
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == CM_DELETE_ID) {
+            // получаем из пункта контекстного меню данные по пункту списка
+            val acmi = item.menuInfo as AdapterView.AdapterContextMenuInfo
+            var id = acmi.id
+            // извлекаем id записи и удаляем соответствующую запись в БД
+            databaseHelper!!.writableDatabase!!.delete(DatabaseHelper.TABLE, DatabaseHelper.COLUMN_ID + " = " + id, null)
+            // обновляем курсор
+            userCursor!!.requery()
+            onResume()
+            return true
+        }
+        return super.onContextItemSelected(item)
+    }
+
     @SuppressLint("Recycle")
     override fun onResume() {
         var sharedPreferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
@@ -81,6 +105,8 @@ class FirstCursorFragment : Fragment() {
         )
 
         binding.list.adapter = userAdapter
+        registerForContextMenu(binding.list)
+
 
         var regularDB = sharedPreferences.getString(getString(R.string.list_preference_room_cursor), "")
         when(regularDB){
@@ -95,6 +121,10 @@ class FirstCursorFragment : Fragment() {
         super.onDestroy()
         db!!.close()
         userCursor!!.close()
+    }
+
+    companion object {
+        private const val CM_DELETE_ID = 1
     }
 
 }

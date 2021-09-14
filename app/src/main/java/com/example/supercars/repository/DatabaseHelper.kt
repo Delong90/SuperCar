@@ -30,7 +30,7 @@ class DatabaseHelper(context: Context?) :
 
     companion object {
 //        private val DATABASE_NAME = "cars-database.db" // название бд
-        private val DATABASE_NAME = "cars-database" // название бд
+val DATABASE_NAME = "cars-database" // название бд
         private val SCHEMA = 1 // версия базы данных
 //        val TABLE = "cars_cursor" // название таблицы в бд
         val TABLE = "cars" // название таблицы в бд
