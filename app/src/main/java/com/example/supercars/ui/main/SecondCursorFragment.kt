@@ -63,7 +63,7 @@ class SecondCursorFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        db!!.close()
+//        db!!.close()
         _binding = null
     }
 

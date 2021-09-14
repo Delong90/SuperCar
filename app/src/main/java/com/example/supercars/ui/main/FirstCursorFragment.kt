@@ -63,7 +63,8 @@ class FirstCursorFragment : Fragment() {
         menuInfo: ContextMenu.ContextMenuInfo?
     ) {
         super.onCreateContextMenu(menu, v, menuInfo)
-        menu.add(0, CM_DELETE_ID, 0, R.string.delete_record)
+        menu.add(0, CM_DELETE_ID, 0, R.string.delete_entry)
+//        menu.add(0, CM_EDIT_ID, 0, R.string.edit_entry)
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
@@ -72,12 +73,16 @@ class FirstCursorFragment : Fragment() {
             val acmi = item.menuInfo as AdapterView.AdapterContextMenuInfo
             var id = acmi.id
             // извлекаем id записи и удаляем соответствующую запись в БД
-            databaseHelper!!.writableDatabase!!.delete(DatabaseHelper.TABLE, DatabaseHelper.COLUMN_ID + " = " + id, null)
+//            databaseHelper!!.writableDatabase!!.delete(DatabaseHelper.TABLE, DatabaseHelper.COLUMN_ID + " = " + id, null)
+            db!!.delete(DatabaseHelper.TABLE, DatabaseHelper.COLUMN_ID + " = " + id, null)
             // обновляем курсор
             userCursor!!.requery()
             onResume()
             return true
         }
+//        if (item.itemId == CM_EDIT_ID){
+//            findNavController().navigate(R.id.action_firstCursorFragment_to_secondCursorFragment)
+//        }
         return super.onContextItemSelected(item)
     }
 
@@ -125,6 +130,7 @@ class FirstCursorFragment : Fragment() {
 
     companion object {
         private const val CM_DELETE_ID = 1
+//        private const val CM_EDIT_ID = 2
     }
 
 }

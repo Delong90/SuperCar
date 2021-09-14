@@ -24,4 +24,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="delete_record">Delete record</string>
+    <string name="delete_entry">Delete entry</string>
+    <string name="edit_entry">Edit entry</string>
 </resources>
