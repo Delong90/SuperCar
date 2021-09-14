@@ -105,8 +105,10 @@ class FirstCursorFragment : Fragment() {
             DatabaseHelper.COLUMN_PRICE
         )
         userAdapter = SimpleCursorAdapter(
-            view?.context, R.layout.line_item,
-            userCursor, headers, intArrayOf(R.id.text1, R.id.text2, R.id.text3, R.id.text4), 0
+//            view?.context, R.layout.line_item,
+            view?.context, R.layout.cars_list_item,
+//            userCursor, headers, intArrayOf(R.id.text1, R.id.text2, R.id.text3, R.id.text4), 0
+            userCursor, headers, intArrayOf(R.id.carBrand, R.id.carModel, R.id.carYearOfIssue, R.id.carPrice), 0
         )
 
         binding.list.adapter = userAdapter
